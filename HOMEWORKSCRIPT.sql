@@ -52,13 +52,19 @@ where film_id in (
 );
 --Lambs Cincinatti
 --7. Which actor has been in the least movies?
-select count(actor_id), actor_id  from film_actor
-group by  actor_id
-order by count(actor_id) 
+ 
+;
+
+select actor_id, first_name, last_name from actor
+where actor_id in (
+	select  actor_id  from film_actor
+	group by  actor_id
+	order by count(actor_id)
+	limit 1
+)
 ;
 --8. Which country has the most cities?
-select  distinct country_id
-from city;
+
 
 select  c.country, count(city) as num_cities
 from city c1
